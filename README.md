@@ -1,2 +1,2 @@
 # MiraiNikki
-## GIT
+## GIT itu
