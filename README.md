@@ -1,2 +1,3 @@
 # MiraiNikki
 ## GIT itu
+# akusayangkamu
