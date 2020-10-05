@@ -1,21 +1,40 @@
-print('''----
-username = SLMN007 
-password = sulaiman007
-diatas adalah password dan usernamenya jika menginputkan selain kata tersebut maka akan terjadi eror
-----''')
+import sys
+from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QHBoxLayout, QVBoxLayout, QPushButton
 
-userandpass = {'SLMN007': 'sulaiman007', 'aku': 'saya', 'dia': 'mereka'}
-chance = 3
+# membuat fungsi utk menentukan layout window
 
-while chance != 0:
-    user = input('masukkan username: ')
-    pss = input('masukkan password: ')
 
-    for cek in userandpass:
-        if user == cek and pss == userandpass[cek]:
-            print('anda berhasil masuk')
-            chance = 0
-            break
-    else:
-        print('maaf user name dan password anda salah')
-        chance -= 1
+def window_go():
+    # inisialisasi pyqt
+    app = QApplication(sys.argv)
+    window = QWidget()
+
+    # menyiapkan label, menempelkan label ke window
+    # settext, dan posisi
+    label = QLabel('Hasil Angka')
+    button_widget = QWidget()
+    button_layout = QHBoxLayout()
+    for i in range(10):
+        button = QPushButton('{}'.format(i + 1))
+        button_layout.addWidget(button)
+        button.setStyleSheet("QPushButton { background-color: white }"
+                             "QPushButton:pressed { background-color: red }")
+
+    # combine layout with button
+    button_widget.setLayout(button_layout)
+
+    # combine layout with label and allthings
+    widget = QWidget()
+    layout = QVBoxLayout()
+    layout.addWidget(label)
+    layout.addWidget(button_widget)
+    widget.setLayout(layout)
+
+    # Show widget
+    widget.show()
+    # Start event loop
+    app.exec_()
+
+
+if __name__ == '__main__':
+    window_go()
