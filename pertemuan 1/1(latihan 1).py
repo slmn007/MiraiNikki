@@ -1,40 +1,56 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QHBoxLayout, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
-# membuat fungsi utk menentukan layout window
 
-
-def window_go():
-    # inisialisasi pyqt
+def window():
     app = QApplication(sys.argv)
-    window = QWidget()
+    win = QWidget()
 
-    # menyiapkan label, menempelkan label ke window
-    # settext, dan posisi
-    label = QLabel('Hasil Angka')
-    button_widget = QWidget()
-    button_layout = QHBoxLayout()
-    for i in range(10):
-        button = QPushButton('{}'.format(i + 1))
-        button_layout.addWidget(button)
-        button.setStyleSheet("QPushButton { background-color: white }"
-                             "QPushButton:pressed { background-color: red }")
+    l1 = QLabel()
+    l2 = QLabel()
+    l3 = QLabel()
+    l4 = QLabel()
 
-    # combine layout with button
-    button_widget.setLayout(button_layout)
+    l1.setText("Hello World")
+    l4.setText("TutorialsPoint")
+    l2.setText("welcome to Python GUI Programming")
 
-    # combine layout with label and allthings
-    widget = QWidget()
-    layout = QVBoxLayout()
-    layout.addWidget(label)
-    layout.addWidget(button_widget)
-    widget.setLayout(layout)
+    l1.setAlignment(Qt.AlignCenter)
+    l3.setAlignment(Qt.AlignCenter)
+    l4.setAlignment(Qt.AlignRight)
+    l2.setIndent(20)
+    l2.setWordWrap(False)
+    l3.setPixmap(QPixmap("python.jpg"))
 
-    # Show widget
-    widget.show()
-    # Start event loop
-    app.exec_()
+    vbox = QVBoxLayout()
+    vbox.addWidget(l1)
+    vbox.addStretch()
+    vbox.addWidget(l2)
+    vbox.addStretch()
+    vbox.addWidget(l3)
+    vbox.addStretch()
+    vbox.addWidget(l4)
+
+    l1.setOpenExternalLinks(True)
+    l4.linkActivated.connect(clicked)
+    l2.linkHovered.connect(hovered)
+    l1.setTextInteractionFlags(Qt.TextSelectableByMouse)
+    win.setLayout(vbox)
+
+    win.setWindowTitle("QLabel Demo")
+    win.show()
+    sys.exit(app.exec_())
+
+
+def hovered():
+    print("hovering")
+
+
+def clicked():
+    print("clicked")
 
 
 if __name__ == '__main__':
-    window_go()
+    window()
