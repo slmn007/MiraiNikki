@@ -14,7 +14,9 @@ def num_show():
         button = QPushButton('{}'.format(i + 1))
         button_layout.addWidget(button)
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        button.setStyleSheet("QPushButton:pressed { background-color: white }")
+        button.setStyleSheet(
+            "font-size: 20pt; font-weight: bold; color: blue;"
+        )
 
     # combine layout with button
     button_widget.setLayout(button_layout)
