@@ -4,53 +4,44 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
 
-def window():
+class checkdemo(QWidget):
+    def __init__(self, parent=None):
+        super(checkdemo, self).__init__(parent)
+
+        layout = QHBoxLayout()
+        self.b1 = QCheckBox("Button1")
+        self.b1.setChecked(True)
+        self.b1.stateChanged.connect(lambda: self.btnstate(self.b1))
+        layout.addWidget(self.b1)
+
+        self.b2 = QCheckBox("Button2")
+        self.b2.toggled.connect(lambda: self.btnstate(self.b2))
+
+        layout.addWidget(self.b2)
+        self.setLayout(layout)
+        self.setWindowTitle("checkbox demo")
+
+    def btnstate(self, b):
+        if b.text() == "Button1":
+            if b.isChecked() == True:
+                print(b.text()+" is selected")
+            else:
+                print(b.text()+" is deselected")
+
+        if b.text() == "Button2":
+            if b.isChecked() == True:
+                print(b.text()+" is selected")
+            else:
+                print(b.text()+" is deselected")
+
+
+def main():
+
     app = QApplication(sys.argv)
-    win = QWidget()
-
-    l1 = QLabel()
-    l2 = QLabel()
-    l3 = QLabel()
-    l4 = QLabel()
-
-    l1.setText("Hello World")
-    l4.setText("TutorialsPoint")
-    l2.setText("welcome to Python GUI Programming")
-
-    l1.setAlignment(Qt.AlignCenter)
-    l3.setAlignment(Qt.AlignCenter)
-    l4.setAlignment(Qt.AlignRight)
-    l2.setIndent(20)
-    l2.setWordWrap(False)
-    l3.setPixmap(QPixmap("python.jpg"))
-
-    vbox = QVBoxLayout()
-    vbox.addWidget(l1)
-    vbox.addStretch()
-    vbox.addWidget(l2)
-    vbox.addStretch()
-    vbox.addWidget(l3)
-    vbox.addStretch()
-    vbox.addWidget(l4)
-
-    l1.setOpenExternalLinks(True)
-    l4.linkActivated.connect(clicked)
-    l2.linkHovered.connect(hovered)
-    l1.setTextInteractionFlags(Qt.TextSelectableByMouse)
-    win.setLayout(vbox)
-
-    win.setWindowTitle("QLabel Demo")
-    win.show()
+    ex = checkdemo()
+    ex.show()
     sys.exit(app.exec_())
 
 
-def hovered():
-    print("hovering")
-
-
-def clicked():
-    print("clicked")
-
-
 if __name__ == '__main__':
-    window()
+    main()
